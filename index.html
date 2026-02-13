@@ -115,6 +115,7 @@
       background: rgba(255,255,255,0.92);
       color: #5b1b6e;
       min-width: 120px;
+      z-index: 4; 
     }
     #yesBtn:hover{ transform: translateY(-2px) scale(1.02); filter: brightness(1.02); }
 
@@ -127,6 +128,7 @@
       position:absolute;
       left: calc(50% + 70px);
       top: 0;
+      z-index: 5;
     }
     #noBtn:hover{ transform: scale(1.03); }
 
@@ -181,66 +183,64 @@
   <script>
     // floating hearts
     const hearts = document.getElementById('hearts');
-    for (let i=0;i<18;i++){
-      const h = document.createElement('div');
-      h.className = 'heart';
-      h.style.left = Math.random()*100 + 'vw';
-      h.style.animationDuration = (6 + Math.random()*7) + 's';
-      h.style.animationDelay = (-Math.random()*10) + 's';
-      h.style.opacity = (0.25 + Math.random()*0.55);
-      h.style.transform = `translateY(${Math.random()*100}vh) rotate(45deg) scale(${0.7+Math.random()*1.1})`;
-      hearts.appendChild(h);
+    for (let i = 0; i < 18; i++) {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.style.left = Math.random() * 100 + 'vw';
+        h.style.animationDuration = (6 + Math.random() * 7) + 's';
+        h.style.animationDelay = (-Math.random() * 10) + 's';
+        h.style.opacity = (0.25 + Math.random() * 0.55);
+        h.style.transform = `translateY(${Math.random() * 100}vh) rotate(45deg) scale(${0.7 + Math.random() * 1.1})`;
+        hearts.appendChild(h);
     }
 
     const noBtn = document.getElementById('noBtn');
     const yesBtn = document.getElementById('yesBtn');
     const btnRow = document.getElementById('btnRow');
-    const result = document.getElementById('result');
 
-    function moveNoButton(){
-      const rowRect = btnRow.getBoundingClientRect();
-      const btnRect = noBtn.getBoundingClientRect();
+    function moveNoButton() {
+        const rowRect = btnRow.getBoundingClientRect();
+        const btnRect = noBtn.getBoundingClientRect();
 
-      // keep it within the row area
-      const padding = 6;
-      const maxX = rowRect.width - btnRect.width - padding;
-      const maxY = rowRect.height - btnRect.height;
+        const padding = 6;
+        const maxX = Math.max(padding, rowRect.width - btnRect.width - padding);
+        const maxY = Math.max(0, rowRect.height - btnRect.height);
 
-      const x = Math.max(padding, Math.random() * maxX);
-      const y = Math.max(0, Math.random() * maxY);
+        const x = Math.floor(padding + Math.random() * (maxX - padding));
+        const y = Math.floor(Math.random() * (maxY + 1));
 
-      noBtn.style.left = x + 'px';
-      noBtn.style.top = y + 'px';
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
     }
 
-    // Make it hard to click "No"
+    // "No" runs away (desktop + mobile)
+    noBtn.addEventListener('pointerenter', moveNoButton);
     noBtn.addEventListener('mouseenter', moveNoButton);
-    noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNoButton(); }, {passive:false});
-    noBtn.addEventListener('click', (e) => { e.preventDefault(); moveNoButton(); });
 
-    yesBtn.addEventListener('click', () => {
-    window.location.href = "yes.html";
+    // Mobile: runs away when you try to tap it
+    noBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        moveNoButton();
+    }, { passive: false });
+
+    // If somehow clicked, still escape
+    noBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        moveNoButton();
     });
 
-
-      // optional: gentle confetti-ish effect via quick hearts burst
-      for(let i=0;i<10;i++){
-        const h = document.createElement('div');
-        h.className = 'heart';
-        h.style.left = (40 + Math.random()*20) + 'vw';
-        h.style.animationDuration = (3 + Math.random()*3) + 's';
-        h.style.opacity = (0.4 + Math.random()*0.6);
-        hearts.appendChild(h);
-        setTimeout(()=>h.remove(), 5000);
-      }
+    // Yes goes to next page
+    yesBtn.addEventListener('click', () => 
+    {
+        window.location.href = './yes.html';
     });
 
-    // initial placement so it doesn't overlap on small screens
+    // Place NO button initially (inside the row)
     window.addEventListener('load', () => {
-      // position no button somewhere reasonable initially
-      noBtn.style.left = '60%';
-      noBtn.style.top = '0px';
+        noBtn.style.left = '60%';
+        noBtn.style.top = '0px';
     });
+
   </script>
 </body>
 </html>
