@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Riya 💖</title>
+  <style>
+    :root{
+      --glass: rgba(255,255,255,0.16);
+      --border: rgba(255,255,255,0.34);
+      --text: #fff;
+      --shadow: 0 18px 70px rgba(0,0,0,0.38);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      overflow:hidden;
+      background:
+        radial-gradient(1200px 800px at 20% 20%, rgba(255,105,180,0.45), transparent 60%),
+        radial-gradient(1200px 800px at 80% 30%, rgba(255,182,193,0.40), transparent 55%),
+        radial-gradient(1000px 700px at 50% 80%, rgba(255,255,255,0.18), transparent 60%),
+        linear-gradient(135deg, #ff4d6d, #7a2cff);
+    }
+
+    .sparkles{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:0.35;
+    }
+    .s{
+      position:absolute;
+      width:3px; height:3px;
+      background: rgba(255,255,255,0.9);
+      border-radius:999px;
+      animation: twinkle linear infinite;
+    }
+    @keyframes twinkle{
+      from{ transform: translateY(110vh); opacity:0 }
+      10%{opacity:1}
+      to{ transform: translateY(-20vh); opacity:0 }
+    }
+
+    .wrap{
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+    .card{
+      width:min(720px, 94vw);
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 34px 26px;
+      position:relative;
+      text-align:center;
+    }
+
+    .tag{
+      display:inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      background: rgba(0,0,0,0.14);
+      font-weight:700;
+      letter-spacing:0.2px;
+      margin-bottom:14px;
+      font-size:13px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(30px, 4vw, 48px);
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle{
+      margin:0 auto 18px;
+      opacity:0.95;
+      max-width: 56ch;
+      line-height:1.6;
+      font-size: 16px;
+    }
+
+    .letter{
+      margin: 18px auto 20px;
+      max-width: 62ch;
+      text-align:left;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 22px;
+      padding: 18px 18px;
+      line-height: 1.7;
+      font-size: 15.5px;
+    }
+    .letter b{font-weight:800}
+
+    .row{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top: 14px;
+    }
+
+    .btn{
+      border:0;
+      padding: 14px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor:pointer;
+      font-size: 15px;
+      transition: transform 0.12s ease, filter 0.12s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn:hover{ transform: translateY(-2px) scale(1.02); filter: brightness(1.03); }
+
+    .primary{
+      background: rgba(255,255,255,0.92);
+      color: #5b1b6e;
+      min-width: 220px;
+    }
+    .ghost{
+      background: rgba(0,0,0,0.22);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.33);
+      min-width: 220px;
+    }
+
+    .plan{
+      margin-top: 18px;
+      display:none;
+      text-align:left;
+      max-width: 62ch;
+      margin-left:auto;
+      margin-right:auto;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 22px;
+      padding: 16px 16px;
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .footer{
+      margin-top: 16px;
+      opacity:0.8;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" id="sparkles"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="tag">🎬 Filmy Romantic Mode: ON</div>
+      <h1>Riya, it’s a YES?! 🥹💖</h1>
+      <p class="subtitle">
+        Then this is officially our little movie scene, the kind where the background music starts on its own.
+      </p>
+
+      <div class="letter">
+        <div><b>Dear Riya,</b></div>
+        <div style="margin-top:10px">
+          If love stories had subtitles, mine would say:
+          <b>“Every time she smiles, the world gets quieter.”</b>
+        </div>
+        <div style="margin-top:10px">
+          So here’s my filmy confession, I don’t want a perfect Valentine’s day…<br/>
+          I want <b>you</b> in it. The laugh. The moment we look at each other and just… know.
+        </div>
+        <div style="margin-top:10px">
+          Will you let me make you feel special, the way you effortlessly make me feel?
+        </div>
+        <div style="margin-top:12px">
+          Yours (very happily),<br/>
+          <b>— Your Valentine 💘</b>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn primary" id="revealBtn">Reveal the Plan ✨</button>
+        <button class="btn ghost" id="copyBtn">Copy a Cute Message 💌</button>
+      </div>
+
+      <div class="plan" id="plan">
+        <div><b>Our Valentine Plan (movie-style):</b></div>
+        <div style="margin-top:8px">🌹 Step 1: You show up looking pretty (as always).</div>
+        <div>🍽️ Step 2: Dinner date lots of “just one bite?” stealing.</div>
+        <div>🎭 Step 3: A tiny surprise (gift + one song… yes, a song).</div>
+        <div>🌙 Step 4: A slow walk / drive and I hold your hand like it’s my favorite habit.</div>
+        <div style="margin-top:10px; opacity:0.92;">
+        </div>
+      </div>
+
+      <div class="footer">P.S. If she’s reading this: Riya, you’re adored. 💖</div>
+    </div>
+  </div>
+
+  <script>
+    // sparkles
+    const sparkles = document.getElementById('sparkles');
+    for (let i=0;i<40;i++){
+      const s = document.createElement('div');
+      s.className = 's';
+      s.style.left = Math.random()*100 + 'vw';
+      s.style.animationDuration = (5 + Math.random()*9) + 's';
+      s.style.animationDelay = (-Math.random()*12) + 's';
+      s.style.opacity = (0.25 + Math.random()*0.75);
+      sparkles.appendChild(s);
+    }
+
+    const revealBtn = document.getElementById('revealBtn');
+    const plan = document.getElementById('plan');
+    revealBtn.addEventListener('click', () => {
+      plan.style.display = (plan.style.display === 'block') ? 'none' : 'block';
+      revealBtn.textContent = (plan.style.display === 'block') ? 'Hide the Plan 🙈' : 'Reveal the Plan ✨';
+    });
+
+    const copyBtn = document.getElementById('copyBtn');
+    const msg =
+`Riya 💖
+Okay so… I’m officially asking: will you be my Valentine? 🥹
+I want a cute filmy date with you dinner, a small surprise, and a song.
+Say yes and I’ll take care of the rest 🌹`;
+
+    copyBtn.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(msg);
+        copyBtn.textContent = 'Copied! ✅';
+        setTimeout(()=>copyBtn.textContent='Copy a Cute Message 💌', 1600);
+      }catch(e){
+        alert("Copy didn’t work on this browser. Just screenshot it 😄");
+      }
+    });
+  </script>
+</body>
+</html>

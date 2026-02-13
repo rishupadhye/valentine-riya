@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Be My Valentine?</title>
+  <style>
+    :root{
+      --card-bg: rgba(255,255,255,0.18);
+      --card-border: rgba(255,255,255,0.35);
+      --text: #ffffff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      overflow:hidden;
+
+      /* sweet good-looking background */
+      background:
+        radial-gradient(1200px 800px at 20% 20%, rgba(255,105,180,0.45), transparent 60%),
+        radial-gradient(1200px 800px at 80% 30%, rgba(255,182,193,0.40), transparent 55%),
+        radial-gradient(1000px 700px at 50% 80%, rgba(255,255,255,0.18), transparent 60%),
+        linear-gradient(135deg, #ff4d6d, #7a2cff);
+    }
+
+    /* subtle floating hearts */
+    .hearts{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:0.35;
+      filter: blur(0.2px);
+    }
+    .heart{
+      position:absolute;
+      width:14px; height:14px;
+      background: rgba(255,255,255,0.85);
+      transform: rotate(45deg);
+      border-radius: 4px;
+      animation: floatUp linear infinite;
+    }
+    .heart:before,.heart:after{
+      content:"";
+      position:absolute;
+      width:14px; height:14px;
+      background: rgba(255,255,255,0.85);
+      border-radius:50%;
+    }
+    .heart:before{ left:-7px; top:0 }
+    .heart:after{ left:0; top:-7px }
+    @keyframes floatUp{
+      from{ transform: translateY(110vh) rotate(45deg); opacity:0 }
+      10%{opacity:1}
+      to{ transform: translateY(-20vh) rotate(45deg); opacity:0 }
+    }
+
+    .wrap{
+      height:100%;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+
+    .card{
+      width:min(560px, 92vw);
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 34px 26px 28px;
+      text-align:center;
+      position:relative;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: 0.2px;
+    }
+    p{
+      margin:0 0 22px;
+      opacity:0.95;
+      font-size: 16px;
+      line-height:1.5;
+    }
+
+    .btnRow{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      margin-top: 18px;
+      position:relative;
+      height: 56px;
+    }
+
+    button{
+      border:0;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor:pointer;
+      font-size: 16px;
+      transition: transform 0.12s ease, filter 0.12s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #yesBtn{
+      background: rgba(255,255,255,0.92);
+      color: #5b1b6e;
+      min-width: 120px;
+    }
+    #yesBtn:hover{ transform: translateY(-2px) scale(1.02); filter: brightness(1.02); }
+
+    /* NO button is positioned absolutely so it can run */
+    #noBtn{
+      background: rgba(0,0,0,0.25);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.35);
+      min-width: 120px;
+      position:absolute;
+      left: calc(50% + 70px);
+      top: 0;
+    }
+    #noBtn:hover{ transform: scale(1.03); }
+
+    .result{
+      margin-top: 18px;
+      font-size: 16px;
+      display:none;
+    }
+
+    .big{
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .tiny{
+      opacity:0.9;
+      font-size: 14px;
+      margin-top:10px;
+    }
+
+    .footerNote{
+      margin-top: 18px;
+      opacity: 0.8;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="wrap">
+    <div class="card" id="card">
+      <h1>Will you be my Valentine? 💖</h1>
+      <p>Just one tiny question… and a very big smile waiting on the other side :)</p>
+
+      <div class="btnRow" id="btnRow">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn" aria-label="No">No</button>
+      </div>
+
+      <div class="result" id="result">
+        <div class="big">YAYYYYY!!! 💞🥹</div>
+        <div class="tiny">
+          Now tell her: <b>“I have a little surprise planned — check your messages 😄”</b><br/>
+          Suggestion: add a second page with your plan (dinner + flowers + a song), or show a cute photo + a short note.
+        </div>
+        <div class="footerNote">Tip: screenshot this page after she clicks Yes 😌</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // floating hearts
+    const hearts = document.getElementById('hearts');
+    for (let i=0;i<18;i++){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.animationDuration = (6 + Math.random()*7) + 's';
+      h.style.animationDelay = (-Math.random()*10) + 's';
+      h.style.opacity = (0.25 + Math.random()*0.55);
+      h.style.transform = `translateY(${Math.random()*100}vh) rotate(45deg) scale(${0.7+Math.random()*1.1})`;
+      hearts.appendChild(h);
+    }
+
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const btnRow = document.getElementById('btnRow');
+    const result = document.getElementById('result');
+
+    function moveNoButton(){
+      const rowRect = btnRow.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      // keep it within the row area
+      const padding = 6;
+      const maxX = rowRect.width - btnRect.width - padding;
+      const maxY = rowRect.height - btnRect.height;
+
+      const x = Math.max(padding, Math.random() * maxX);
+      const y = Math.max(0, Math.random() * maxY);
+
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    }
+
+    // Make it hard to click "No"
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNoButton(); }, {passive:false});
+    noBtn.addEventListener('click', (e) => { e.preventDefault(); moveNoButton(); });
+
+    yesBtn.addEventListener('click', () => {
+    window.location.href = "yes.html";
+    });
+
+
+      // optional: gentle confetti-ish effect via quick hearts burst
+      for(let i=0;i<10;i++){
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.style.left = (40 + Math.random()*20) + 'vw';
+        h.style.animationDuration = (3 + Math.random()*3) + 's';
+        h.style.opacity = (0.4 + Math.random()*0.6);
+        hearts.appendChild(h);
+        setTimeout(()=>h.remove(), 5000);
+      }
+    });
+
+    // initial placement so it doesn't overlap on small screens
+    window.addEventListener('load', () => {
+      // position no button somewhere reasonable initially
+      noBtn.style.left = '60%';
+      noBtn.style.top = '0px';
+    });
+  </script>
+</body>
+</html>
